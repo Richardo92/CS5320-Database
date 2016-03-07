@@ -47,8 +47,9 @@ public class Tests {
 		String test = Utils.outputTree(tree);
 		String correct = "@10/@%%@5/8/@@12/14/@%%[(2,2);(4,4);]#[(5,5);(7,7);]#[(8,8);(9,9);]$[(10,10);(11,11);]#[(12,12);(13,13);]#[(14,14);(15,15);(16,16);]$%%";
 		assertEquals(test, correct);
-
+		assertTrue(tree.search(2).equals("2"));
 		tree.delete(2);
+		assertEquals(tree.search(2), null);
 		test = Utils.outputTree(tree);
 		Utils.printTree(tree);
 		correct = "@8/10/12/14/@%%[(4,4);(5,5);(7,7);]#[(8,8);(9,9);]#[(10,10);(11,11);]#[(12,12);(13,13);]#[(14,14);(15,15);(16,16);]$%%";
@@ -66,10 +67,18 @@ public class Tests {
 		BPlusTree<Integer, String> tree = new BPlusTree<Integer, String>();
 		Utils.bulkInsert(tree, exampleNumbers, primeNumberStrings);
 		Utils.printTree(tree);
+		assertTrue(tree.search(13).equals("13"));
+		assertTrue(tree.search(17).equals("17"));
+		assertTrue(tree.search(30).equals("30"));
+		assertEquals(tree.search(39), null);
 		tree.delete(13);
 		tree.delete(17);
 		tree.delete(30);
 		tree.insert(39, "39");
+		assertEquals(tree.search(13), null);
+		assertEquals(tree.search(17), null);
+		assertEquals(tree.search(30), null);
+		assertTrue(tree.search(39).equals("39"));
 		Utils.printTree(tree);
 		// Initial tree
 		String test = Utils.outputTree(tree);
@@ -87,10 +96,15 @@ public class Tests {
 		}
 		BPlusTree<Integer, String> tree = new BPlusTree<Integer, String>();
 		Utils.bulkInsert(tree, testNumbers, testNumberStrings);
-
+		assertTrue(tree.search(6).equals("6"));
+		assertTrue(tree.search(7).equals("7"));
+		assertTrue(tree.search(8).equals("8"));
 		tree.delete(6);
 		tree.delete(7);
 		tree.delete(8);
+		assertEquals(tree.search(6), null);
+		assertEquals(tree.search(7), null);
+		assertEquals(tree.search(8), null);
 		String test = Utils.outputTree(tree);
 		Utils.printTree(tree);
 
