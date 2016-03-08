@@ -348,6 +348,19 @@ public class BPlusTree<K extends Comparable<K>, T> {
 			int location = findParentLocation(smallerIndex, biggerIndex, parent);
 			/** move one element from bigger to smaller node */
 			moveOneFromBigger(smallerIndex, biggerIndex, parent, location);
+			/** redistribute is special in IndexNode, we need to pull the parent key down and push the bigger key up */
+			if (smallerIndex.keys.get(0).compareTo(biggerIndex.keys.get(0)) >= 0) { // smaller node is on the right side
+				K rmKey = parent.keys.remove(location);
+				parent.keys.add(location, smallerIndex.keys.get(0));
+				smallerIndex.keys.remove(0);
+				smallerIndex.keys.add(0, rmKey);
+			}
+			else {
+				K rmKey = parent.keys.remove(location);
+				parent.keys.add(location, smallerIndex.keys.get(smallerIndex.keys.size() - 1));
+				smallerIndex.keys.remove(smallerIndex.keys.size() - 1);
+				smallerIndex.keys.add(rmKey);
+			}
 			return -1;
 		}
 		else { // merge
