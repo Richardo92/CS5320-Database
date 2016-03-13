@@ -106,8 +106,8 @@ public class BPlusTree<K extends Comparable<K>, T> {
 			int m = findKeyRange(keys, key);
 			Entry<K, Node<K, T>> temp = insert(children.get(m), key, value); // bottom up, get the inserted result below this level
 			if (temp != null) { // if temp is not null, split below this level has happened. insert this new element into the node of this level
-				keys.add(temp.getKey());
-				children.add(temp.getValue());
+				keys.add(m, temp.getKey());
+				children.add(m + 1, temp.getValue());
 				if (root.keys.size() > 2 * D) { // if split needs to happen again
 					K splitKey = root.keys.get(D); // find the split key
 					return splitIndexNode((IndexNode<K, T>) root, splitKey); // split this node, return it to the upper level
@@ -242,7 +242,7 @@ public class BPlusTree<K extends Comparable<K>, T> {
 				return -1;
 			keys.remove(i);
 			((LeafNode<K, T>) curr).values.remove(i);
-			if (i == 0 && curr.isUnderflowed()) { // if smaller node is on the left side, this time index = 0, so bigger node should be the nextLeaf
+			if (index == 0 && curr.isUnderflowed()) { // if smaller node is on the left side, this time index = 0, so bigger node should be the nextLeaf
 				return handleLeafNodeUnderflow(((LeafNode<K, T>) curr), ((LeafNode<K, T>) curr).nextLeaf, parent);
 			}
 			else if (curr.isUnderflowed()) { // if smaller node is on the right side, so bigger node should be the previousLeaf
@@ -259,6 +259,10 @@ public class BPlusTree<K extends Comparable<K>, T> {
 				keys.remove(ret); // delete this key
 				children.remove(ret); // remove left child of this key
 				if (curr.isUnderflowed()) { // if current node is underflowed
+//					if (curr.keys.size() == 0) { // if current index node is empty, change it as LeafNode
+//						curr = children.get(1);
+//						return -1;
+//					}
 					if (index == 0) { // if smaller node is on the left side, this time index = 0, so bigger node should be at index + 1
 						return handleIndexNodeUnderflow((IndexNode<K, T>) curr, (IndexNode<K, T>) parent.children.get(index + 1), parent);
 					}
@@ -368,7 +372,7 @@ public class BPlusTree<K extends Comparable<K>, T> {
 			//parent.children.remove(location + 1); // remove right child node
 			/** move all elements from left to right */
 			if (smallerIndex.keys.get(0).compareTo(biggerIndex.keys.get(0)) >= 0) { // smaller node is on the right side
-				smallerIndex.keys.add(parent.keys.get(location)); // move parent node with key k to right node
+				smallerIndex.keys.add(0, parent.keys.get(location)); // move parent node with key k to right node
 				/** move all left keys and children to right node */
 				for (int i = biggerIndex.keys.size() - 1; i >= 0; i--) {
 					smallerIndex.keys.add(0, biggerIndex.keys.get(i));
