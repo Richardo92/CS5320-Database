@@ -68,7 +68,8 @@ public class PageRank {
             } else {
                 // Set up leftover and size
             	
-            	
+            	job.getCounters().findCounter(myCounter.COUNTER).setValue(0);
+            	job.getCounters().findCounter(myCounter.SIZE).setValue(0);
             }
                 
         }

@@ -14,7 +14,7 @@ public class LeftoverReducer extends Reducer<IntWritable, Node, IntWritable, Nod
     	Configuration conf = context.getConfiguration();
     	long size = Long.parseLong(conf.get("size"));
     	long leftoverLong = Long.parseLong(conf.get("leftover"));
-    	double leftover = leftoverLong / 100000000; // calculate m which is leftover here
+    	double leftover = ((double) leftoverLong) / 100000000; // calculate m which is leftover here
     	
     	Node node = Ns.iterator().next(); // get the node
     	double pagerank = node.getPageRank(); // get the page rank of this node, which is p

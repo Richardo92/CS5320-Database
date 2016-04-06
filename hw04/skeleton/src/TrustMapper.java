@@ -16,7 +16,7 @@ public class TrustMapper extends Mapper<IntWritable, Node, IntWritable, NodeOrDo
     	if (value.outgoingSize() == 0) { // dangling node
     		double pageRank = value.getPageRank();
     		Configuration conf = context.getConfiguration();
-    		long inc = (long) pageRank * 100000000; // multiply one hundred million as long
+    		long inc = (long) (pageRank * 100000000); // multiply one hundred million as long
     		context.getCounter("myCounter", "COUNTER").increment(inc); // add page rank of this node to counter
     	}
     	else {
