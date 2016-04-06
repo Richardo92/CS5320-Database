@@ -12,11 +12,6 @@ import org.apache.hadoop.util.*;
 
 
 public class PageRank {
-	
-	public static enum myCounter {
-		COUNTER,
-		SIZE
-	}
 
     public static void main(String[] args) throws IOException {
         int numRepititions = 5;
@@ -29,6 +24,7 @@ public class PageRank {
             }
             else {
                 job = getLeftoverJob(leftover, size);
+
             }
 
             String inputPath = null;

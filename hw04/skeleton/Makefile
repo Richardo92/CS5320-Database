@@ -1,6 +1,6 @@
 hadoop = hadoop
 
-bases = LeftoverMapper LeftoverReducer NodeInputFormat Node NodeOrDouble NodeOutputFormat NodeRecordReader NodeRecordWriter TrustMapper TrustReducer PageRank
+bases = LeftoverMapper LeftoverReducer NodeInputFormat Node NodeOrDouble NodeOutputFormat NodeRecordReader NodeRecordWriter TrustMapper TrustReducer PageRank Helper 
 classDir = classes
 sourceDir = src
 HADOOP_DIR=/opt/hadoop-2.7.2

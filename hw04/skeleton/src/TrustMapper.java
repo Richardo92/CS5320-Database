@@ -12,11 +12,11 @@ public class TrustMapper extends Mapper<IntWritable, Node, IntWritable, NodeOrDo
     public void map(IntWritable key, Node value, Context context) throws IOException, InterruptedException {
         //Implement 
     	context.write(key, new NodeOrDouble(value)); // Emit(nid n, node N);
-    	context.getCounter(myCounter.SIZE).increment(1); // increment the number of nodes by 1
+    	context.getCounter(Helper.myCounter.SIZE).increment(1); // increment the number of nodes by 1
     	if (value.outgoingSize() == 0) { // dangling node
     		double pageRank = value.getPageRank();
     		long inc = (long) (pageRank * 100000000); // multiply one hundred million as long
-    		context.getCounter(myCounter.COUNTER).increment(inc); // add page rank of this node to counter
+    		context.getCounter(Helper.myCounter.COUNTER).increment(inc); // add page rank of this node to counter
     	}
     	else {
     		double p = value.getPageRank() / value.outgoingSize();
