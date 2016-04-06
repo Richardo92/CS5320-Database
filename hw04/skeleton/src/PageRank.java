@@ -72,8 +72,8 @@ public class PageRank {
             	
             	job.getCounters().findCounter(myCounter.COUNTER).setValue(0);
             	job.getCounters().findCounter(myCounter.SIZE).setValue(0);
-                System.out.println("leftover: " + myCounter.COUNTER);
-                System.out.println("size: " + myCounter.SIZE);
+                System.out.println("leftover: " + job.getCounters().findCounter(myCounter.COUNTER).getValue());
+                System.out.println("size: " + job.getCounters().findCounter(myCounter.SIZE).getValue());
             }
                 
         }
