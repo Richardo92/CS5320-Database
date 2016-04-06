@@ -59,17 +59,17 @@ public class PageRank {
                 // Set up leftover and size
             	
             	
-            	leftover = job.getCounters().findCounter(myCounter.COUNTER).getValue();
-            	size = job.getCounters().findCounter(myCounter.SIZE).getValue();
+            	leftover = job.getCounters().findCounter(Helper.myCounter.COUNTER).getValue();
+            	size = job.getCounters().findCounter(Helper.myCounter.SIZE).getValue();
                 System.out.println("leftover: " + leftover);
                 System.out.println("size: " + size);
             } else {
                 // Set up leftover and size
             	
-            	job.getCounters().findCounter(myCounter.COUNTER).setValue(0);
-            	job.getCounters().findCounter(myCounter.SIZE).setValue(0);
-                System.out.println("leftover: " + job.getCounters().findCounter(myCounter.COUNTER).getValue());
-                System.out.println("size: " + job.getCounters().findCounter(myCounter.SIZE).getValue());
+            	job.getCounters().findCounter(Helper.myCounter.COUNTER).setValue(0);
+            	job.getCounters().findCounter(Helper.myCounter.SIZE).setValue(0);
+                System.out.println("leftover: " + job.getCounters().findCounter(Helper.myCounter.COUNTER).getValue());
+                System.out.println("size: " + job.getCounters().findCounter(Helper.myCounter.SIZE).getValue());
             }
                 
         }
