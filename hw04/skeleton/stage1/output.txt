@@ -1,0 +1,5 @@
+1 NaN 2,3,4
+2 NaN 3,4
+3 NaN
+4 NaN 3
+5 NaN 3
