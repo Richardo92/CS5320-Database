@@ -65,11 +65,15 @@ public class PageRank {
             	
             	leftover = job.getCounters().findCounter(myCounter.COUNTER).getValue();
             	size = job.getCounters().findCounter(myCounter.SIZE).getValue();
+                System.out.println("leftover: " + leftover);
+                System.out.println("size: " + size);
             } else {
                 // Set up leftover and size
             	
             	job.getCounters().findCounter(myCounter.COUNTER).setValue(0);
             	job.getCounters().findCounter(myCounter.SIZE).setValue(0);
+                System.out.println("leftover: " + myCounter.COUNTER);
+                System.out.println("size: " + myCounter.SIZE);
             }
                 
         }
