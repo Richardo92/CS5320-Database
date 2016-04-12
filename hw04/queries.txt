@@ -1,11 +1,38 @@
+// Initialization:
+create (d1: Character {name: 'Dragon'})
+create (a1: Ability {name: 'Fly'})
+create (a2: Ability {name: 'Fly Breath'})
+create (e1: Element {name: 'Fire'})
+create (e2: Element {name: 'Air'})
+create (d1) - [: HasElement] -> (e1)
+create (d1) - [: HasElement] -> (e2)
+create (d1) - [: Can] -> (a1)
+create (d1) - [: Can] -> (a2)
+create (a1) - [: HasElement] -> (e2)
+create (a2) - [: HasElement] -> (e1)
+create (a2) - [: HasElement] -> (e2)
+create (e1) - [: EffectiveAgainst] -> (e2)
+
+
+
 // Query 1.
 
 // Enter your answer here.
+match (a: Character) - [r1: Can] -> (b: Ability) - [r2: HasElement] -> (c: Element {name: ‘Fire’})
+return DISTINCT a.name, c.name
+order by a.name, c.name
 
 
 // Query 2.
 
 // Enter your answer here.
+match (a: Character) - [r1: Can] -> (b: Ability) - [r2: HasElement] -> (c: Element)
+with a, collect(c) as temp
+where not any (x in temp where (not x.name = ‘Air’))
+return a.name
+
+
+
 
 
 // Query 3.
